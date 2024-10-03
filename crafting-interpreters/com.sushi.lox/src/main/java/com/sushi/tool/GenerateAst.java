@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 public class GenerateAst {
     public static void main(String[] args) throws IOException {
@@ -13,8 +12,9 @@ public class GenerateAst {
             System.err.println("Usage: generate_ast <output dir>");
             System.exit(64);
         }
-        String outoutDir = args[0];
-        defineAst(outoutDir, "Expr", Arrays.asList(
+        String outputDir = args[0];
+
+        defineAst(outputDir, "Expr", Arrays.asList(
                 "Binary   : Expr left, Token operator, Expr right",
                 "Grouping : Expr expression",
                 "Literal  : Object value",
