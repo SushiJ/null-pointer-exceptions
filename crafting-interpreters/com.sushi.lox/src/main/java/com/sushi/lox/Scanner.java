@@ -81,7 +81,29 @@ class Scanner {
             case '/':
                 if(match('/'))  {
                     while(peek() != '\n' && !isAtEnd()) advance();
-                } else {
+                } else if(match('*')){
+                    int nesting = 1;
+                    while(nesting > 0) {
+                        if(peek() == '\0') {
+                            Lox.error(line, "Unterminated block comment" + c + ".");
+                            return;
+                        }
+                        if(peek() == '\n') line++;
+                        if(peek() == '/' && peekNext() == '*') {
+                            advance();
+                            advance();
+                            nesting++;
+                        }
+                        if(peek() == '*' && peekNext() == '/') {
+                            advance();
+                            advance();
+                            nesting--;
+                            continue;
+                        }
+                        advance();
+                    }
+                }
+                else {
                     addToken(SLASH);
                 }
                 break;
