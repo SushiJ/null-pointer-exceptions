@@ -1,0 +1,1 @@
+java -cp target/classes com.sushi.tool.GenerateAst src/main/java/com/sushi/lox/ 
